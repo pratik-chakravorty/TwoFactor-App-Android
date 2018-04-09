@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "860532437877",
+    "firebase_url": "https://twofactorauth-4e907.firebaseio.com",
+    "project_id": "twofactorauth-4e907",
+    "storage_bucket": "twofactorauth-4e907.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:860532437877:android:d45eed44322b15d1",
+        "android_client_info": {
+          "package_name": "com.pratik.twofactorauth"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "860532437877-vh5em821ske5f3srshuvp5ev7684vfha.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.pratik.twofactorauth",
+            "certificate_hash": "bf09535ff5949a64755f446f76f910ac11717b4d"
+          }
+        },
+        {
+          "client_id": "860532437877-2gtvg1o2v7r617c4bf0k4b3sj4abh07n.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC0S-PmrC4eJBgpaE9QR_UBkNi8Qo9i2dQ"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "860532437877-2gtvg1o2v7r617c4bf0k4b3sj4abh07n.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

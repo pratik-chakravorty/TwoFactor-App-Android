@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">TwoFactorAuth</string>
+    <string name="hint_username">Username</string>
+    <string name="hint_password">Password</string>
+    <string name="login">Login</string>
+    <string name="choice_1">Login using 2FA</string>
+    <string name="choice_2">Login using Fingerprint</string>
+    <string name="sign_up">Not a member yet? Sign Up</string>
+    <string name="hint_email">Email</string>
+    <string name="logout">Log Out</string>
+</resources>
