@@ -394,6 +394,7 @@ import java.util.concurrent.TimeUnit;
                             mVerificationField);
                     //  mDetailText.setText(R.string.status_verification_failed);
                     Toast.makeText(PhoneAuthActivity.this, "verification failed", Toast.LENGTH_LONG).show();
+                    startActivity(new Intent(getApplication(),PhoneAuthActivity.class));
                     break;
                 case STATE_VERIFY_SUCCESS:
                     // Verification has succeeded, proceed to firebase sign in

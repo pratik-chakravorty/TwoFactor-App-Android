@@ -72,6 +72,8 @@ public class Registration extends AppCompatActivity {
                 String mail  = email.getText().toString().trim();
                 String pass  = password.getText().toString().trim();
 
+
+
                 signup(uName, mail, pass);
 
             }
@@ -110,7 +112,7 @@ public class Registration extends AppCompatActivity {
 
                         // Inserting row in users table
 //                        userInfo.setEmail(email);
-//                        userInfo.setUsername(uName);
+                          //userInfo.setUsername(uName);
 //                        session.setLoggedin(true);
                         mProgress.show();
                         startActivity(new Intent(Registration.this, PhoneAuthActivity.class));

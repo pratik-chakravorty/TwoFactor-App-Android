@@ -1,5 +1,6 @@
 package com.pratik.twofactorauth;
 
+
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -16,7 +17,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListAdapter;
 import android.widget.ListView;
-import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -30,7 +30,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class Main2Activity extends AppCompatActivity {
 
     public String temporary;
     public String temporary2;
@@ -53,38 +53,20 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        startauthentication();
 
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_main2);
         listViewArtist = findViewById(R.id.listView);
         buttonAddArtist = findViewById(R.id.buttonAddArtist);
         name = findViewById(R.id.editText);
 
-        SharedPreferences mPreferences;
-        mPreferences = MainActivity.this.getSharedPreferences("User", MODE_PRIVATE);
-
-        temporary = mPreferences.getString("saveuserid", "");
-
-
-        if(temporary!= null && !temporary.isEmpty()) {
-
-            mAuth = FirebaseAuth.getInstance();
-            mFirebaseDatabase = FirebaseDatabase.getInstance();
-            myRef = mFirebaseDatabase.getReference();
-            FirebaseUser currentFirebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-            userid = currentFirebaseUser.getUid();
-
-
-        }
         list = new ArrayList<Artist>();
-        databaseArtists = FirebaseDatabase.getInstance().getReference(userid);
+        databaseArtists = FirebaseDatabase.getInstance().getReference("Pratik");
         buttonAddArtist.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 addArtist();
             }
         });
-
         listViewArtist.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
@@ -107,7 +89,7 @@ public class MainActivity extends AppCompatActivity {
                     list.add(artist);
                 }
 
-                ListAdapter adapter = new com.pratik.twofactorauth.ListAdapter(MainActivity.this,list);
+                ListAdapter adapter = new com.pratik.twofactorauth.ListAdapter(Main2Activity.this,list);
                 listViewArtist.setAdapter(adapter);
             }
 
@@ -118,60 +100,22 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    public void startauthentication(){
 
-        SharedPreferences mPreferences;
-        mPreferences = getSharedPreferences("User", MODE_PRIVATE);
-
-        Intent i = new Intent();
-        temporary = mPreferences.getString("saveuserid", "");
-        if(temporary!= null && !temporary.isEmpty()){
-
-
-        }
-        else{
-
-
-            Intent y = new Intent(MainActivity.this, Choice.class);
-            y.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            y.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-            startActivity(y);
-
-        }
-    }
 
     public void signoutbutton(View s) {
         if (s.getId() == R.id.fab) {
 
 
 
-            AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+            AlertDialog.Builder builder = new AlertDialog.Builder(Main2Activity.this);
             builder.setMessage("Do you really want to Log Out ?").setCancelable(false)
                     .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-
-                            if(!temporary.isEmpty()) {
-                                SharedPreferences mPreferences;
-
-                                mPreferences = getSharedPreferences("User", MODE_PRIVATE);
-                                SharedPreferences.Editor editor = mPreferences.edit();
-                                editor.clear();
-                                editor.apply();
-                                mAuth.signOut();
-                                userid = "";
-                                Intent y = new Intent(MainActivity.this, Choice.class);
+                                Intent y = new Intent(Main2Activity.this, Choice.class);
                                 y.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                                 y.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                 startActivity(y);
-                            }
-
-                            SharedPreferences userPreferences;
-                            userPreferences = getSharedPreferences("Username",MODE_PRIVATE);
-                            SharedPreferences.Editor editor3 = userPreferences.edit();
-                            editor3.clear();
-                            editor3.apply();
-
                         }
                     })
                     .setNegativeButton("No", new DialogInterface.OnClickListener() {
@@ -233,6 +177,26 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    private boolean updateArtist(String id,String name) {
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Pratik").child(id);
+
+        Artist artist = new Artist(id,name);
+
+        databaseReference.setValue(artist);
+
+        Toast.makeText(this,"Task Updated Successfully",Toast.LENGTH_LONG).show();
+
+        return true;
+    }
+
+    private void deleteArtist(String artistId) {
+        DatabaseReference drArtist =FirebaseDatabase.getInstance().getReference("Pratik").child(artistId);
+
+        drArtist.removeValue();
+
+        Toast.makeText(Main2Activity.this,"Task deleted",Toast.LENGTH_SHORT).show();
+    }
+
     private void addArtist() {
         String artistName = name.getText().toString().trim();
 
@@ -251,26 +215,6 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(getApplicationContext(),"Please Enter Task",Toast.LENGTH_SHORT).show();
         }
 
-    }
-
-    private boolean updateArtist(String id,String name) {
-        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference(userid).child(id);
-
-        Artist artist = new Artist(id,name);
-
-        databaseReference.setValue(artist);
-
-        Toast.makeText(this,"Task Updated Successfully",Toast.LENGTH_LONG).show();
-
-        return true;
-    }
-
-    private void deleteArtist(String artistId) {
-        DatabaseReference drArtist =FirebaseDatabase.getInstance().getReference(userid).child(artistId);
-
-        drArtist.removeValue();
-
-        Toast.makeText(MainActivity.this,"Task deleted",Toast.LENGTH_SHORT).show();
     }
 
 }

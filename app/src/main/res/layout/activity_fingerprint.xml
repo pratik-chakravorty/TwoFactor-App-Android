@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center"
+    android:background="@drawable/mainbg"
     tools:context="com.pratik.twofactorauth.Fingerprint">
 
 
@@ -19,6 +20,7 @@
             android:layout_height="300dp"
             android:src="@drawable/ic_fingerprint"
             tools:ignore="ContentDescription"
+            android:tint="#fff"
             android:gravity="center"/>
 
         <EditText
@@ -30,6 +32,7 @@
             android:hint="Passcode"
             android:inputType="number"
             android:maxLength="4"
+            android:backgroundTint="#fff"
             android:minEms="8"/>
     </ViewSwitcher>
 
@@ -39,7 +42,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:gravity="center"
-        android:textSize="18sp"/>
+        android:textSize="18sp"
+        android:textColor="#fff"/>
 
     <Button
         android:id="@+id/go_to_settings_btn"
@@ -48,6 +52,6 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:text="Open Settings"
-        android:textColor="@android:color/holo_blue_dark"/>
+        android:textColor="#fff"/>
 
 </LinearLayout>

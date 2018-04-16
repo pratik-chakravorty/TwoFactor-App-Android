@@ -104,13 +104,15 @@ public class Fingerprint extends AppCompatActivity implements FingerPrintAuthCal
     @Override
     public void onAuthSuccess(FingerprintManager.CryptoObject cryptoObject) {
         Toast.makeText(Fingerprint.this, "Authentication succeeded.", Toast.LENGTH_SHORT).show();
-        SharedPreferences mPreferences;
-
-        mPreferences = getSharedPreferences("FingerPrintUser", MODE_PRIVATE);
-        SharedPreferences.Editor editor = mPreferences.edit();
-        editor.putString("fingerprint", "data-one");
-        editor.commit();
-        startActivity(new Intent(Fingerprint.this, MainActivity.class));
+//        SharedPreferences mPreferences;
+//
+//        mPreferences = getSharedPreferences("FingerPrintUser", MODE_PRIVATE);
+//        SharedPreferences.Editor editor = mPreferences.edit();
+//        editor.putString("fingerprint", "data-one");
+//        editor.commit();
+        Intent i = new Intent(Fingerprint.this,Main2Activity.class);
+        i.putExtra("fingerprint-data","data");
+        startActivity(i);
     }
 
     @Override
